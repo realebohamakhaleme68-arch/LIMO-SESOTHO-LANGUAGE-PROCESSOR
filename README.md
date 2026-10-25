@@ -1,44 +1,75 @@
-# LIMO — A Sesotho-Language Processor
+# LIMO — a Sesotho-language processor and pipeline simulator
 
-## Overview
+LIMO is a 32-bit load–store processor derived from RISC-V (RV32I) whose assembly
+language is **Sesotho**. This repository holds the LIMO instruction set
+architecture and an in-browser simulator that assembles LIMO programs and runs
+them through a five-stage pipeline, showing the datapath, control signals,
+hazards, forwarding and per-cycle statistics.
 
-LIMO is a Sesotho-language instruction set architecture derived from RISC-V, accompanied by an online pipeline datapath and control simulator.
+CS3520 Computer Organisation and Architecture · National University of Lesotho · Team 7.
 
-The project aims to support learning about instruction encoding, processor execution, datapaths, control signals and pipeline hazards through a documented ISA and an interactive simulator.
+## What works today (preliminary implementation)
 
-## Project Objectives
+- **Assembler** (`src/assembler`): a two-pass assembler for the full 15-instruction
+  LIMO set. Labels, comments, decimal and hex immediates, the Sesotho register
+  names and aliases, R/I/S/B/J encoding, immediate-range and offset checks, and
+  plain-language errors with source line numbers.
+- **Pipeline engine** (`src/pipeline`): a real five-stage pipeline (IF, ID, EX,
+  MEM, WB) with the four pipeline latches, control-signal decoding, EX/MEM and
+  MEM/WB forwarding, store-data forwarding, the load-use stall, branch and jump
+  resolution in EX (always-not-taken, two-instruction flush), runtime memory and
+  target faults, cycle/stall/flush/CPI accounting, and full-state snapshots for
+  Step Back.
+- **Tests** (`tests/`): automated assembler and pipeline tests, including the six
+  hand-worked encodings and the three ISA sample programs run end to end.
 
-- Define and document the LIMO instruction set architecture.
-- Develop an assembler for LIMO instructions.
-- Implement instruction execution and processor state.
-- Simulate the five pipeline stages: IF, ID, EX, MEM and WB.
-- Demonstrate forwarding, load-use stalls and control-flow flushes.
-- Test and document the processor and simulator.
+The browser interface (`index.html` + `style.css`) is present and its controls
+are being wired to this engine; that integration is in progress.
 
-## Repository Structure
+## The three sample programs reproduce the ISA's expected results
 
-- `docs/` — ISA specification, design decisions, team documents and milestones.
-- `src/` — assembler, processor core, pipeline and user interface.
-- `tests/` — instruction, assembler, pipeline and integration tests.
-- `examples/` — sample LIMO programs.
-- `AI_USE.md` — AI-use disclosure.
+| Program | committed | stalls | flushes | cycles |
+|---|---|---|---|---|
+| P1 — arithmetic / logic | 11 | 0 | 0 | 15 |
+| P2 — memory + load-use | 8 | 1 | 0 | 13 |
+| P3 — loop, branches, call | 15 | 0 | 6 | 25 |
 
-## Technology Stack
+Final register and memory values match the ISA specification for all three.
 
-To be confirmed by the team.
+## Build, test, run
 
-## Getting Started
+Requires Node.js (18+).
 
-Setup and execution instructions will be added once the technology stack and initial implementation are established.
+```
+npm install      # fetches the TypeScript compiler (dev only)
+npm run build    # compiles src/*.ts to dist/*.js
+npm test         # compiles, then runs the assembler and pipeline tests
+```
 
-## Team
+The simulator is a static site: open `index.html` in any modern browser, or
+publish the repository with GitHub Pages. The compiled engine in `dist/` is
+committed so the page runs with no build step for the viewer.
 
-Add all group members, student numbers if required, and project responsibilities.
+## Repository structure
 
-## Project Status
+```
+index.html, style.css     the browser interface
+src/core/isa.ts           registers, instruction table, encode/decode
+src/assembler/            the two-pass assembler
+src/pipeline/             the five-stage pipeline engine
+src/ui/                   browser wiring (in progress)
+dist/                     compiled JavaScript loaded by the page
+tests/                    automated assembler and pipeline tests
+examples/                 sample LIMO programs
+docs/                     the project handout, ISA specification and design notes
+AI_USE.md                 declaration of AI assistance
+```
 
-Initial repository organization and ISA documentation.
+## Team 7
 
-## Academic Integrity
+Realeboha Makhaleme · Bahlakoana Mosola · Kobo Ts'epo Ramosoeu · Katleho Senqhe ·
+Khauhelo Moleboheng Mosanteli · Tumelo Khosola · Mweli Pama.
 
-The team is responsible for reviewing, testing and understanding the submitted work. See `AI_USE.md` for the AI-use disclosure.
+## Licence
+
+MIT — see `LICENSE`.

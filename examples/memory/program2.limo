@@ -1,0 +1,11 @@
+# LIMO sample program 2 — memory and a load-use stall
+# Expected: 8 instructions, 1 load-use stall, 0 flushes, 13 cycles.
+# Final: lb3=5 lb4=7 lb5=5 lb6=7 lb7=12 ; mem[0]=5 mem[4]=7 mem[8]=12
+kopanyapalo lb3, lefela, 5
+kopanyapalo lb4, lefela, 7
+boloka lb3, 0(lefela)
+boloka lb4, 4(lefela)
+lata lb5, 0(lefela)
+lata lb6, 4(lefela)
+kopanya lb7, lb5, lb6
+boloka lb7, 8(lefela)

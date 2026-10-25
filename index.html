@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>LIMO Pipeline Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>
+        LIMO Pipeline Simulator
+        <small>· CS3520 · Sesotho-language RISC-V derivative · 5-stage pipeline</small>
+      </h1>
+    </header>
+    <main>
+      <div>
+        <section>
+          <h2>Editor &amp; assembler </h2>
+          <div class="bar">
+            <select id="ex" aria-label="Example programs"></select
+            ><button
+              id="tst"
+              title="Runs example programs 1-3 and checks the cycle, stall and flush counts from the M1 spec"
+            >
+              Self-test
+            </button>
+          </div>
+          <div class="bar">
+            <label for="file">Open a .limo file:</label>
+            <input type="file" id="file" accept=".limo,.txt,text/plain" />
+            <button id="save" title="Download the editor contents as a .limo file">Save .limo</button>
+          </div>
+          <textarea id="src" spellcheck="false" aria-label="LIMO source"></textarea>
+          <div id="err" role="status"></div>
+        </section>
+        <section>
+          <h2>Machine code · click a row to toggle a breakpoint</h2>
+          <div class="sc">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>PC</th>
+                  <th>Instruction</th>
+                  <th>Hex</th>
+                  <th>Binary fields (hover for names)</th>
+                </tr>
+              </thead>
+              <tbody id="lst"></tbody>
+            </table>
+          </div>
+        </section>
+        <section>
+          <h2>Registers </h2>
+          <div class="reg" id="regs"></div>
+          <h2 style="margin-top: 8px">Data memory (non-zero words)</h2>
+          <div id="mem" class="mono"></div>
+        </section>
+      </div>
+      <div>
+        <section>
+          <div class="bar">
+            <button id="stp">Step</button><button id="bk">Step back</button
+            ><button id="run">Run</button><button id="pz">Pause</button
+            ><button id="all">Run to end</button><button id="rs">Reset</button>
+            <label><input type="checkbox" id="fwd" checked /> Forwarding</label
+            ><label><input type="checkbox" id="fr" checked /> Freshman mode</label>
+          </div>
+          <div id="stats"></div>
+        </section>
+        <section>
+          <h2>Pipeline stages &amp; datapath values </h2>
+          <div class="stages" id="stg"></div>
+          <div id="lat" class="mono" style="margin-top: 6px; font-size: 12px"></div>
+        </section>
+        <section>
+          <h2>Control signals </h2>
+          <div class="sc"><table id="ctl"></table></div>
+        </section>
+        <section>
+          <h2>Pipeline chart  · IF* / ID* = held by a stall, X = flushed</h2>
+          <div class="sc" id="chart"></div>
+        </section>
+        <section>
+          <h2>Hazard log </h2>
+          <ul id="log"></ul>
+        </section>
+      </div>
+    </main>
+    <script src="assembler.js"></script>
+    <script src="pipeline.js"></script>
+    <script src="ui.js"></script>
+  </body>
+</html>
