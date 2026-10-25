@@ -1,0 +1,13 @@
+# LIMO sample program 3 — loop, branch taken/not taken, and a call
+# Expected: 15 committed, 0 stalls, 6 flushes, 25 cycles.
+# Final: lb3=0 lb4=6 lb5=99 lb6=7 khutla(r1)=32
+kopanyapalo lb3, lefela, 3
+kopanyapalo lb4, lefela, 0
+loop: kopanya lb4, lb4, lb3
+kopanyapalo lb3, lb3, -1
+tlolafapana lb3, lefela, loop
+tlolalekana lb4, lefela, ntle
+kopanyapalo lb5, lefela, 99
+qhoma khutla, ntle
+kopanyapalo lb5, lefela, 1
+ntle: kopanyapalo lb6, lefela, 7

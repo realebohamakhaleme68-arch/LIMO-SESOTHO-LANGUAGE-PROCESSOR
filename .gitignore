@@ -17,7 +17,12 @@ desktop.ini
 *.tmp
 *.bak
 
-# Common build output
-dist/
+# Dependencies (never commit)
+node_modules/
+
+# Build output
 build/
 coverage/
+
+# Note: dist/ holds the compiled browser engine and IS committed so the
+# static site works on GitHub Pages with no build step for the viewer.

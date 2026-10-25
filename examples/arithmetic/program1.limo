@@ -1,0 +1,14 @@
+# LIMO sample program 1 — arithmetic and logic (no hazards that stall)
+# Expected: 11 instructions, 0 stalls, 0 flushes, 15 cycles.
+# Final: lb3=12 lb4=10 lb5=22 lb6=2 lb7=8 lb8=14 lb9=6 lb10=48 lb11=2 lb12=3 lb13=1
+kopanyapalo lb3, lefela, 12
+kopanyapalo lb4, lefela, 10
+kopanya lb5, lb3, lb4
+tlosa lb6, lb3, lb4
+le lb7, lb3, lb4
+kapa lb8, lb3, lb4
+kapafeela lb9, lb3, lb4
+kopanyapalo lb11, lefela, 2
+chechamenahane lb10, lb3, lb11
+chechaarola lb12, lb3, lb11
+papisonyane lb13, lb4, lb3
