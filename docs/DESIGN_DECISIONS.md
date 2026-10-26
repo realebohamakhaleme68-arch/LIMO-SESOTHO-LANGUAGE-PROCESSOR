@@ -15,7 +15,7 @@ Full detail: `LIMO_ISA_Specification_M1.pdf`
 - 16 × 32-bit registers (r0–r15)
 - 4-bit register fields (bit 4 reserved for RV32I bit-compatibility)
 - r0 = **noto** (hard-wired zero)  
-- r1 = **khutla** (return address)
+- r1 = **khutla** (return address)  
 - r2 = **lesupa** (stack pointer)
 - r3–r15 = **lebokose** (general purpose)
 - PC = **sebali** (architectural but not in the register file)
