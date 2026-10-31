@@ -38,13 +38,18 @@ Final register and memory values match the ISA specification for all three.
 
 ## Build, test, run
 
-Requires Node.js (18+).
+Requires Node.js (18+). **All source is TypeScript** (`src/**/*.ts`), compiled with `tsc` to `dist/`.
 
 ```
 npm install      # fetches the TypeScript compiler (dev only)
-npm run build    # compiles src/*.ts to dist/*.js
+npm run build    # compiles src/**/*.ts → dist/**/*.js (isa, assembler, pipeline, ui)
 npm test         # compiles, then runs the assembler and pipeline tests
+npm run typecheck
 ```
+
+In PowerShell, if script execution is disabled and `npm install` is blocked
+because it resolves to `npm.ps1`, run `npm.cmd install` instead. This uses the
+Windows command shim and does not require changing the execution policy.
 
 The simulator is a static site: open `index.html` in any modern browser, or
 publish the repository with GitHub Pages. The compiled engine in `dist/` is

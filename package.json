@@ -5,9 +5,10 @@
   "description": "LIMO — a Sesotho-language RISC-V (RV32I) derivative: assembler and five-stage pipeline simulator (CS3520, Team 7).",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "pretest": "tsc",
-    "test": "node --test \"tests/**/*.test.js\""
+    "build": "node node_modules/typescript/lib/tsc.js",
+    "pretest": "node node_modules/typescript/lib/tsc.js",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "typecheck": "node node_modules/typescript/lib/tsc.js --noEmit"
   },
   "devDependencies": {
     "typescript": "^5.6.3"
