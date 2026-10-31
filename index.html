@@ -88,8 +88,10 @@
         </section>
       </div>
     </main>
-    <script src="assembler.js"></script>
-    <script src="pipeline.js"></script>
-    <script src="ui.js"></script>
+    <!-- Engine order: ISA core → assembler → pipeline → UI -->
+    <script src="dist/core/isa.js"></script>
+    <script src="dist/assembler/assembler.js"></script>
+    <script src="dist/pipeline/pipeline.js"></script>
+    <script src="dist/ui/ui.js"></script>
   </body>
 </html>

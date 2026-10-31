@@ -410,3 +410,62 @@ tr.bp td:first-child {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* ---- M3 pipeline UI extras ---- */
+.stage {
+  border: 1px solid var(--border, #ccc);
+  border-radius: 6px;
+  padding: 8px;
+  background: #fafafa;
+  min-height: 90px;
+}
+.stage.active {
+  background: #e8f4ff;
+  border-color: #4a90d9;
+}
+.stage.empty {
+  opacity: 0.55;
+}
+.stage h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.stage .insn {
+  font-weight: 600;
+  font-size: 13px;
+  word-break: break-all;
+}
+.stage .vals, .stage .small {
+  font-size: 11px;
+  margin-top: 4px;
+  color: #444;
+}
+#stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 8px 0;
+  font-size: 13px;
+}
+#stats .fault { color: #b00020; font-weight: 700; }
+#stats .done { color: #0a7a2f; font-weight: 700; }
+#ctl td.on { background: #d4edda; font-weight: 700; text-align: center; }
+#ctl td.off { color: #999; text-align: center; }
+#ctl th, #ctl td { padding: 3px 6px; font-size: 12px; }
+table.chart { border-collapse: collapse; font-size: 11px; }
+table.chart th, table.chart td { border: 1px solid #ddd; padding: 2px 4px; text-align: center; min-width: 28px; }
+table.chart td.c.IF, table.chart td.c.IF\* { background: #d6eaf8; }
+table.chart td.c.ID, table.chart td.c.ID\* { background: #d5f5e3; }
+table.chart td.c.EX { background: #fdebd0; }
+table.chart td.c.MEM { background: #f5d0e8; }
+table.chart td.c.WB { background: #e8daef; }
+table.chart td.c.X { background: #f5b7b1; color: #7b241c; }
+tr.in-pipe { background: #eef6ff; }
+tr.bp .bp-cell { color: #c0392b; font-weight: 700; }
+.errline { color: #b00020; }
+.ok { color: #0a7a2f; }
+#err { min-height: 1.2em; margin: 6px 0; font-size: 13px; }
+.fld { display: inline-block; margin-right: 2px; padding: 0 2px; background: #f0f0f0; border-radius: 2px; }
+.dec { color: #666; font-size: 11px; }
