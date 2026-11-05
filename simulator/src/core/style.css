@@ -1,0 +1,412 @@
+/* =========================
+   1. Global styles
+   ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #17365d;
+    --primary-light: #244b78;
+    --accent: #0f9d70;
+    --background: #f4f7fb;
+    --panel: #ffffff;
+    --border: #d5e0ee;
+    --text: #172b4d;
+    --muted: #64748b;
+    --error: #c62845;
+    --success: #087f5b;
+
+    /* Table and highlight tints derived from the same palette */
+    --head-bg: #edf3fa;
+    --row-alt: #f8fafd;
+    --button-grey: #e7edf5;
+    --button-grey-hover: #d5dfeb;
+    --focus: #70a9e8;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* =========================
+   2. Header
+   ========================= */
+
+header {
+    background: var(--primary);
+    color: white;
+    padding: 22px 32px;
+    border-bottom: 4px solid var(--primary-light);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header h1 small {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #cbdcf0;
+}
+
+/* =========================
+   3. Main page layout
+   ========================= */
+
+main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: 20px;
+    padding: 24px;
+    align-items: start;
+}
+
+section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-width: 0;
+    box-shadow: 0 2px 8px rgb(23 54 93 / 5%);
+}
+
+section h2 {
+    margin: 0 0 16px;
+    font-size: 18px;
+    color: var(--primary);
+}
+
+/* =========================
+   4. Source editor
+   ========================= */
+
+textarea {
+    display: block;
+    width: 100%;
+    min-height: 260px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    resize: vertical;
+    background: #fbfdff;
+    color: var(--primary);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    tab-size: 4;
+}
+
+textarea:focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+}
+
+#err {
+    min-height: 20px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--error);
+}
+
+/* =========================
+   5. Controls
+   ========================= */
+
+.bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.bar label {
+    font-size: 14px;
+    color: var(--text);
+}
+
+button,
+select {
+    border: none;
+    border-radius: 6px;
+    padding: 11px 18px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--button-grey);
+    color: var(--text);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+select:hover {
+    background: var(--button-grey-hover);
+}
+
+#file {
+    max-width: 100%;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* Main actions use the accent colour */
+
+#stp,
+#run,
+#all {
+    background: var(--accent);
+    color: white;
+}
+
+#stp:hover,
+#run:hover,
+#all:hover {
+    background: var(--success);
+}
+
+button:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+/* =========================
+   6. Tables (machine code, control signals, chart)
+   ========================= */
+
+.sc {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+th,
+td {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
+}
+
+th {
+    background: var(--head-bg);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+    background: var(--row-alt);
+}
+
+.mono,
+.bin {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+}
+
+/* Colour-coded instruction fields (names also appear as tooltips) */
+
+.bin span {
+    margin-right: 5px;
+    padding: 0 1px;
+    border-bottom: 3px solid;
+}
+
+.f0 { border-color: #c62845; }
+.f1 { border-color: #244b78; }
+.f2 { border-color: #0f9d70; }
+.f3 { border-color: #7c3aed; }
+.f4 { border-color: #d97706; }
+.f5 { border-color: #0e7490; }
+
+#lst tr {
+    cursor: pointer;
+}
+
+#lst tr:hover {
+    background: var(--head-bg);
+}
+
+tr.bp td:first-child {
+    color: var(--error);
+    font-weight: 700;
+}
+
+/* =========================
+   7. Pipeline stages and statistics
+   ========================= */
+
+.stages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.st {
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--row-alt);
+    font-size: 12px;
+}
+
+.st b {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--primary);
+    font-size: 14px;
+}
+
+.st i {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-style: normal;
+}
+
+#lat {
+    margin-top: 12px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+}
+
+.pill {
+    display: inline-block;
+    margin: 0 4px 4px 0;
+    padding: 2px 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--head-bg);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* =========================
+   8. Pipeline chart cells
+   ========================= */
+
+.cell {
+    text-align: center;
+}
+
+.IF,
+.IFx {
+    background: #e7edf5;
+}
+
+.ID {
+    background: #ddf3ea;
+}
+
+.EX {
+    background: #dbe8f7;
+}
+
+.MEM {
+    background: #fdf0d5;
+}
+
+.WB {
+    background: #ece6f7;
+}
+
+.X {
+    background: #fbe3e8;
+    color: var(--error);
+    font-weight: 700;
+}
+
+/* =========================
+   9. Registers, memory and hazard log
+   ========================= */
+
+.reg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.reg div {
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.reg .ch {
+    background: #fdf0d5;
+    font-weight: 700;
+}
+
+#log {
+    max-height: 160px;
+    margin: 0;
+    padding-left: 20px;
+    overflow: auto;
+    font-size: 13px;
+}
+
+/* =========================
+   10. Responsive layout
+   ========================= */
+
+@media (max-width: 900px) {
+    main {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    textarea {
+        min-height: 220px;
+    }
+}
+
+@media (max-width: 500px) {
+    header {
+        padding: 18px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    main {
+        padding: 10px;
+        gap: 12px;
+    }
+
+    section {
+        padding: 14px;
+        margin-bottom: 12px;
+    }
+
+    .bar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .bar button {
+        width: 100%;
+    }
+
+    .reg {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
